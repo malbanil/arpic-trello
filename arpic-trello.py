@@ -7,6 +7,7 @@ Created on Fri Oct  9 01:07:31 2020
 """
 
 import mysql.connector
+import time
 from trello import TrelloClient
 
 #trello credentials
@@ -95,5 +96,7 @@ def main():
     
 
 if __name__ == '__main__':
-    main()    
+    while True:
+        main()
+        time.sleep(20)
     
