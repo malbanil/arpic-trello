@@ -9,6 +9,7 @@ Created on Fri Oct  9 01:07:31 2020
 import mysql.connector
 import time
 from trello import TrelloClient
+import sys
 
 #trello credentials
 TKEY = "0583727d23603125a162e7fb33e02d5e"
@@ -81,17 +82,18 @@ def main():
     TLABELS = TBOARD_OBJ.get_labels()
     #...................................................
     
-    
-    #Create card
-    rdsCardId = 0
-    for x in rdsMesagges:
-        rdsCardId = int(x[0])
-        data = [x[3].decode(),x[4].decode(),x[2].decode()]
-        arpicAddcard(TLABELS,TLIST_OBJ,data)
-        print(int(x[0]))
-        
-    updlastCard = arpicSetLastRdsTrelloCard(mydb,rdsCardId)
-   
+    if rdsMesagges :    
+        #Create card
+        rdsCardId = 0
+        for x in rdsMesagges:
+            rdsCardId = int(x[0])
+            data = [x[3].decode(),x[4].decode(),x[2].decode()]
+            arpicAddcard(TLABELS,TLIST_OBJ,data)
+            print("- Add trello card:" + str(rdsCardId) )
+            
+        updlastCard = arpicSetLastRdsTrelloCard(mydb,rdsCardId)
+    else:
+        print("- Not new messages.")
    
     
 
@@ -99,4 +101,5 @@ if __name__ == '__main__':
     while True:
         main()
         time.sleep(20)
+        print("Scanning RDS messages...")
     
