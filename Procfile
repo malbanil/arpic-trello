@@ -1,1 +1,1 @@
-worker: python arpic_trello.py
+worker: python app.py
