@@ -10,6 +10,7 @@ import mysql.connector
 import time
 from trello import TrelloClient
 import sys
+import os
 
 #trello credentials
 TKEY = "0583727d23603125a162e7fb33e02d5e"
@@ -26,6 +27,8 @@ RDSPASS = "adminarpic$2020"
 RDSDB = "arpic"
 
 LIMITCARDS = 3
+CRON_TIME = 20
+
 
 
 def arpicAddcard(obj_labels,obj_list,data):
@@ -99,7 +102,10 @@ def main():
 
 if __name__ == '__main__':
     while True:
-        main()
-        time.sleep(20)
-        print("Scanning RDS messages...")
+        lc_start = os.environ['ARP_START']
+        #lc_start = 1
+        if lc_start == 1:
+            main()
+            time.sleep(CRON_TIME)
+            print("Scanning RDS messages V2...")
     
