@@ -162,5 +162,5 @@ if __name__ == '__main__':
      #   if lc_start == 1:
      #       main()
             #time.sleep(CRON_TIME)
-    #        print("Scanning RDS messages V2...")
+    #        print("Scanning RDS messages V3...")
     
